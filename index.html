@@ -1,0 +1,248 @@
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>SnapTrip</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+      
+</head>
+<body>
+
+
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg bg" style="background-color: rgb(47, 140, 177);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">SnapTrip</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#f">Searched flights</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+              <button class="btn btn-outline-success" type="submit" style="background-color: rgb(101, 171, 211);">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+
+ <br>
+
+
+
+
+    
+<div class="container" style="background-color: aliceblue;opacity: 0.6; width: 500px;height: 500px;float: right ;border-radius: 10px;" id="contactform">
+
+     
+
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="myInput" placeholder="Where to go" required>
+    <label for="floatingInput"> from : Country or city</label>
+    <span id="errorName"></span>
+  </div>
+
+
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="myInput" placeholder="Where to go" required>
+    <label for="floatingInput"> to : Country or city</label>
+    <span id="errorName"></span>
+  </div>
+
+
+  <div class="form-floating mb-3">
+    <input type="date" class="form-control" id="myInput" placeholder="Where to go" required>
+    <label for="floatingInput">take off date</label>
+    <span id="errorName"></span>
+  </div>
+
+
+  <div class="form-floating mb-3">
+    <input type="date" class="form-control" id="myInput" placeholder="Where to go" required>
+    <label for="floatingInput">returning date</label>
+    <span id="errorName"></span>
+  </div>
+
+
+
+
+ 
+
+      <select id="passengers">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+
+
+
+
+
+
+
+
+      <button type="submit" class="btn btn-outline-primary" onclick="" id="showBtn" >Search flights</button>
+      <h4 id="message"></h4>
+
+      <select id="passengers">
+        <option>Anywhere</option>
+        <option>specific place</option>
+      </select> 
+
+
+   
+
+
+
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div id="f">
+  
+
+</div>
+
+<div class="container" id="cardsContainer"></div>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<footer style="width: 100%;height: 300px;background-color: black;"><br>
+
+  <h1 style="color: aliceblue;">  Sign in to have 20% off !</h1>
+
+ <br>
+  <div class="form-floating mb-3">
+    <input type="email" class="form-control" id="floatingInput" placeholder="Email" required style="width: 500px;">
+    <label for="floatingInput">Email address</label>
+  </div>
+  <div class="form-floating">
+    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required style="width: 500px;">
+    <label for="floatingPassword">Password</label>
+  </div>
+
+ <br>
+ 
+  <button type="button" class="btn btn-primary">Sign in</button>
+
+
+
+
+</footer>
+
+
+
+</body>
+<script>
+
+const inputs = document.querySelectorAll("#myInput");
+  const message = document.getElementById("message");
+  const cardsContainer = document.getElementById("cardsContainer");
+  const button = document.getElementById("showBtn");
+
+  // Titles for each card
+  const cardTitles = [
+    "Qatar Airways -",
+    "Turkish Airways -",
+    "Jazeera Airways -",
+    "Kuwait Airways -"
+  ];
+
+  // Image URLs for each card (replace with your own if you want)
+  const cardImages = [
+    "image/download.webp",
+    "image/downloa.webp",
+    "image/download (1).webp",
+    "image/download (2).webp"
+  ];
+
+  button.addEventListener("click", () => {
+    message.textContent = "";
+    cardsContainer.innerHTML = "";
+
+    const values = Array.from(inputs).map(input => input.value.trim());
+
+    if (values.some(val => val === "")) {
+      message.textContent = "⚠ Please fill in all fields!";
+      return;
+    }
+
+    const combinedText = `${values[0]}\n${values.slice(1).join("\n")} 
+    price=120$`;
+
+    for (let i = 0; i < 4; i++) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const img = document.createElement("img");
+      img.src = cardImages[i] || "https://picsum.photos/400/200";
+      img.alt = cardTitles[i];
+
+      const title = document.createElement("div");
+      title.className = "card-title";
+      title.textContent = cardTitles[i] || "Card";
+
+      const content = document.createElement("div");
+      content.className = "card-content";
+      content.textContent = combinedText;
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(content);
+      cardsContainer.appendChild(card);
+    }
+  });
+</script>
+
+
+
+
+<script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+<script src="booking.js"></script>
+</html>
